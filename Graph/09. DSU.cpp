@@ -1,5 +1,4 @@
-//Author: Siddharth Saurav
-//cf @ sidd_11
+//Author : Siddharth Saurav (Chem 23)
 
 #include <bits/stdc++.h>
 using namespace std;

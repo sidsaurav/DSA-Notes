@@ -1,3 +1,5 @@
+//Author : Siddharth Saurav (Chem 23)
+
 /*
 Articulation Point
 1. we will require 3 array -> parent, discovery num, lowest disc no which the node can touch excluding

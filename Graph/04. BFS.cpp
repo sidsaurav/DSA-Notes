@@ -1,3 +1,5 @@
+//Author : Siddharth Saurav (Chem 23)
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -81,6 +83,13 @@ void printPath(int i, int j){
     printPath(parent[i][j].first, parent[i][j].second);
 }
 
+/*
+2 concepts (isvalid and cnt concept) read comments- 
+https://leetcode.com/submissions/detail/728436524/
+*/
+
+
+
 
 /*
 In the above question there are variations-
@@ -95,4 +104,13 @@ dist between any two start and end point. Use concept of pseudo node. Connect al
 with a pseudo node and all dest with another pseudo node and ans will be dist between
 pseduonode - 2. multisource and multidest BFS.
 BFS.
+*/
+
+
+
+
+/*
+One config to another config in shortest number of moves if we know next moves.
+apply bfs in these type of questions.
+https://leetcode.com/problems/sliding-puzzle/
 */

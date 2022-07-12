@@ -1,3 +1,8 @@
+//Author : Siddharth Saurav (Chem 23)
+
+// https://www.youtube.com/watch?v=PSy0yJQx050
+
+
 #include <bits/stdc++.h>
 using namespace std;
 

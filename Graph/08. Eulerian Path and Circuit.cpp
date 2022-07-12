@@ -1,3 +1,5 @@
+//Author : Siddharth Saurav (Chem 23)
+
 Eulerian Path -> Path which visits every edge once and only once.
 Eulerian Circuit -> Eulerian Path whose start and end nodes are same.
  
