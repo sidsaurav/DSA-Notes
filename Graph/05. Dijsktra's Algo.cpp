@@ -19,8 +19,14 @@ Dijkstra's Algorithm
 Dijkstra does not work for negative weight cycle int the graph.
 */
 
+/*
+Optimisation: jis jis node k lye dist fix kr lye use vis array me true kr do and jb v wo encounter ho while loop me to
+continue kr do else vis[node] = 1. This will avoid TLE in some cases.
+*/
+
 vector<vector<pii>> g(1e6);
 vector<int> dist(1e6, 1e9);
+vector<int> vis(1e6, 1e9); // optimisation
 vector<int> par(1e6, -1);
 
 int main(){
@@ -35,14 +41,19 @@ int main(){
     multiset<pair<int, int>> s; // {dist, {node, path}}.
     s.insert({0, 2});
     dist[2] = 0;
+    vis[2] = 1;
     path[2] = "2->";
     while(!s.empty()){
         auto p = *s.begin();
         s.erase(s.begin());
+        
+        //optimisation
+        if(vis[p.ss] == 1) continue;
+        vis[p.ss] = 1;
+        
         for(auto x : g[p.ss]){
             if(dist[x.ff] > dist[p.ss]+x.ss){
                 dist[x.ff] = dist[p.ss]+x.ss;
-                // path[x.ff] = path[p.ss] + to_string(x.ff) + "->"; // updating path
                 par[x.ff] = p.ss;
                 s.insert({dist[x.ff], x.ff});
             }
