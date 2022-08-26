@@ -41,8 +41,6 @@ int main(){
     multiset<pair<int, int>> s; // {dist, {node, path}}.
     s.insert({0, 2});
     dist[2] = 0;
-    vis[2] = 1;
-    path[2] = "2->";
     while(!s.empty()){
         auto p = *s.begin();
         s.erase(s.begin());
