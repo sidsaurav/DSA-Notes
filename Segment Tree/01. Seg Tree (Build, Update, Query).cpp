@@ -88,5 +88,5 @@ int main(){
     }
     build_max(1, 0, n-1);
     update_max(2, 15, 1, 0, n-1); // update index 2 with val 15.
-    cout << query_max(1, 5, 1, 0, n-1); // query from 1 to 4.
+    cout << query_max(1, 5, 1, 0, n-1); // query from 1 to 5.
 }    
