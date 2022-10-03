@@ -9,11 +9,11 @@ that node in sorted order.
 Now we can use binary search to get numbers of elements greater than or
 smaller than a given value.
 In the following code, number of elements greater than equal to K is
-returned.
+implemented.
 
 
 
-Space Complexy -> O(n*log(n))
+Space Complexity -> O(n*log(n))
 (total number of elements in each level of seg tree * number of levels)
 */
 
