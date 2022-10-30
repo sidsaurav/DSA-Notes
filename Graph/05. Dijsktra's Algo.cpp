@@ -1,4 +1,4 @@
-//Author : Siddharth Saurav (Chem 23)
+//Author : Siddharth Saurav (IIT BHU'23)
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -42,17 +42,18 @@ int main(){
     s.insert({0, 2});
     dist[2] = 0;
     while(!s.empty()){
-        auto p = *s.begin();
+        auto fr = *s.begin();
         s.erase(s.begin());
         
         //optimisation
-        if(vis[p.ss] == 1) continue;
-        vis[p.ss] = 1;
+        if(vis[fr.ss] == 1) continue;
+        vis[fr.ss] = 1;
         
-        for(auto x : g[p.ss]){
-            if(dist[x.ff] > dist[p.ss]+x.ss){
-                dist[x.ff] = dist[p.ss]+x.ss;
-                par[x.ff] = p.ss;
+        for(auto x : g[fr.ss]){
+            // never use dist[fr.ss], instead use fr.ff
+            if(dist[x.ff] > fr.ff+x.ss){
+                dist[x.ff] = fr.ff+x.ss;
+                par[x.ff] = fr.ss;
                 s.insert({dist[x.ff], x.ff});
             }
         }
