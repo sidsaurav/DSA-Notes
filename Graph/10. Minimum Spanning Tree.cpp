@@ -86,7 +86,7 @@ int primsMST(){
     vector<bool> vis(n+1, false);
     int cnt_nodes = 0;
     int min_cost = 0;
-    while(!pq.empty()){
+    while(!s.empty()){
         auto nodePair = *(s.begin()); // first -> dist, second -> vertex
         s.erase(nodePair);
         if(vis[nodePair.second] == true){
