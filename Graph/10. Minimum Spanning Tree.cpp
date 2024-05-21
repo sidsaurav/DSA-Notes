@@ -89,10 +89,12 @@ int primsMST(){
     while(!s.empty()){
         auto nodePair = *(s.begin()); // first -> dist, second -> vertex
         s.erase(nodePair);
+        
         if(vis[nodePair.second] == true){
             continue;
         }
         cnt_nodes++;
+        
         min_cost += nodePair.first;
         vis[nodePair.second] = true;
         for(auto x : adj[nodePair.second]){
@@ -101,6 +103,7 @@ int primsMST(){
             }
         }
     }
+    
     if(cnt_nodes != n){
         cout << "No MST found" << endl;
         return;
