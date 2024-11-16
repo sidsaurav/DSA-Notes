@@ -1,92 +1,55 @@
-//Author: Siddharth Saurav
-//cf @ sidd_11
-
 /*
-MERGE SORT TREE (Seg Tree + Binary Search)
-
 Here each node of the tree will contain vector of numbers falling inside
 that node in sorted order.
-Now we can use binary search to get numbers of elements greater than or
-smaller than a given value.
-In the following code, number of elements greater than equal to K is
-implemented.
-
-
-
+TC : Build - O(nlogn), Query - O(logn*logn)
 Space Complexity -> O(n*log(n))
 (total number of elements in each level of seg tree * number of levels)
+
+Number of element greater than x is implemented in following code.
 */
-
-
-
-
 #include <bits/stdc++.h>
 using namespace std;
 
+int n;
 vector<vector<int>> seg;
 
-vector<int> merge(vector<int>& v1, vector<int>& v2){
-    int n = v1.size();
-    int m = v2.size();
-
-    vector<int> temp(n+m);
-    int i = 0;
-    int j = 0;
-
-    int k = 0;
-    while(i<n and j<m){
-        if(v1[i] < v2[j]){
-            temp[k++] = v1[i++];
-        }
-        else{
-            temp[k++] = v2[j++];
-        }
-    }
-
-    while(i<n){
-        temp[k++] = v1[i++];
-    }
-
-    while(j<m){
-        temp[k++] = v2[j++];
-    }
-
-    return temp;
-}
-
-void build_tree(int N, int l, int r, vector<int>& v){
+void build(vector<int>&nums, int node, int l, int r) {
     if(l == r){
-        seg[N].push_back(v[l]);
+        seg[node] = {nums[l]};
         return;
     }
 
     int mid = (l+r)/2;
 
-    build_tree(2*N, l, mid, v);
-    build_tree(2*N+1, mid+1, r, v);
+    build(nums, 2*node, l, mid);
+    build(nums, 2*node + 1, mid+1, r);
 
-    seg[N] = merge(seg[2*N], seg[2*N + 1]);
+    std::merge(seg[2*node].begin(), seg[2*node].end(), 
+               seg[2*node+1].begin(), seg[2*node+1].end(), 
+               back_inserter(seg[node]));
 }
 
-
-int query_tree(int i, int j, int num, int N, int l, int r){
-    if(i>r or j<l) return 0;
-    if(l>=i and r<=j){
-        int idx = lower_bound(seg[N].begin(), seg[N].end(), num) - seg[N].begin();
-        return (r-l+1) - idx; // total - numbers smaller than num
+int query(int val, int i, int j, int node, int l, int r) {
+    if(l>=i and r<=j) {
+        return seg[node].size() - (upper_bound(seg[node].begin(), seg[node].end(), val) - seg[node].begin());
     }
+    if(l>j || r<i) {
+        return 0;
+    }
+    int mid = (l+r)/2;
+    int a1 = query(val, i, j, 2*node, l, mid);
+    int a2 = query(val, i, j, 2*node+1, mid+1, r);
 
-    int mid = (l+r) >> 1;
-    int n1 = query_tree(i, j, num, 2*N, l, mid);
-    int n2 = query_tree(i, j, num, 2*N+1, mid+1, r);
-    
-    return n1 + n2; 
+    return a1 + a2;
 }
 
-int32_t main(){
-    vector<int> v = {5,1,1,8,3};
-    int n = v.size();
-    seg.resize(4*n);
-    build_tree(1, 0, n-1, v);
-    cout << query_tree(0, n-1, 2, 1, 0, n-1); //(i, j, K, node, tree_i, tree_j)
-}    
+int main() {
+    vector<int> num = {1,4,2,7,4,9,4,2};
+    n = num.size();
+    seg.resize(4*n, vector<int>());
+    build(num, 1, 0, n-1);
+
+    int val, l, r;
+    cin >> val >> l >> r;
+    cout << query(val, l, r, 1, 0, n-1);
+}
